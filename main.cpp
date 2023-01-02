@@ -1,6 +1,6 @@
 
 
-//6
+//7
 #include <GL/glut.h>
 
 #include <stdlib.h>
