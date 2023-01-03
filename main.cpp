@@ -1,11 +1,18 @@
-
-
 #include <GL/glut.h>
 
 #include <stdlib.h>
 
 #include <math.h>
+//#include <irrklang/irrKlang.h>
+//using namespace irrklang;
 
+//ISoundEngine *SoundEngine = createIrrKlangDevice();
+  
+//void sound::Init()
+//{
+    //[...]
+    //SoundEngine->play2D("audio/breakout.mp3", true);
+//}
 
 float xRotated = 90.0, yRotated = 0.0, zRotated = 0.0;
 
@@ -26,19 +33,22 @@ void reshapeFunc (int w, int h)
     glMatrixMode(GL_MODELVIEW);
 }
 
-//------------------------------  display   -------------------------------
+//variables declaration
 
 float x=0 , y=0 , z =0;
 float r = 1 , g = 0 , b = 0;
 
+float step=0; // change x
+float step2=0; // change y
+float step3 = 0; // change z
+float step4 = 0 ;
 
 
 
 
 
 
-
-
+//rocket tip function
 void rocket(){
     /*glMatrixMode(GL_MODELVIEW);
         // clear the drawing buffer.
@@ -72,7 +82,7 @@ void rocket(){
     
 }
 
-
+//rocket sphere shape function
 void moon() {
     glPushMatrix();
     glTranslatef(0 ,0,0);
@@ -88,11 +98,12 @@ void moon() {
     glPopMatrix();
 
 }
+//white moon function
 void moon2() {
     glPushMatrix();
-    glTranslatef(-5,0,3+z);
+    glTranslatef(-5,0,17+z);
 
-    glColor3f(1, 1, 1); // Red color used to draw.
+    glColor3f(0, 0, 1); // Red color used to draw.
     // changing in transformation matrix.
     // rotation about X axis
     glRotatef(xRotated, 1, 0, 0);
@@ -101,17 +112,17 @@ void moon2() {
     glRotatef(zRotated,0.0,0.0,1.0);
     glScalef(0.5,0.5,0.5); // scaling transfomation
     // NOTE: built-in (glut library) function , draw you a sphere.
-    glutSolidSphere(1,20,7);
+    glutSolidSphere(2,20,7);
     glPopMatrix();
     
 }
-
+//orange sun function
 void sun() {
     glPushMatrix();
-    glTranslatef(0,3,-0.5 + z);
+    glTranslatef(0,3,8 + z);
 
     //glColor3f(1, 0.5, 0); // Red color used to draw.
-    glColor3f(1, 0.5, 0);
+    glColor3f(0.75, 0.75, 0.75);
     // changing in transformation matrix.
     // rotation about X axis
     
@@ -125,7 +136,7 @@ void sun() {
     glPopMatrix();
     
 }
-
+//cube without built in functions function (base of house)
 void cube(){
     glPushMatrix();
     glBegin (GL_QUADS) ;
@@ -171,7 +182,7 @@ void cube(){
     glPopMatrix();
 
 }
-
+//rocket ring piece function
 void ring(){
     glPushMatrix();
     
@@ -185,6 +196,7 @@ void ring(){
     
 }
 
+//rocket left leg
 void cuboid(){
     glPushMatrix();
     glColor3f(1, 0, 0);
@@ -196,6 +208,8 @@ void cuboid(){
     glPopMatrix();
     
 }
+
+//rocket right leg
 void cuboid2(){
     glPushMatrix();
     glColor3f(1, 0, 0);
@@ -207,7 +221,7 @@ void cuboid2(){
     glPopMatrix();
     
 }
-
+//rocket middle piece
 void cuboid3(){
     glPushMatrix();
     glColor3f(0, 0, 1);
@@ -219,6 +233,7 @@ void cuboid3(){
     glPopMatrix();
     
 }
+//rocket middle leg
 void cuboid4(){
     glPushMatrix();
     glColor3f(1, 0, 0);
@@ -251,6 +266,7 @@ void tot(){
     glPopMatrix();
     
 }
+//all pieces of rocket in one function
 void rocky(){
     rocket();
     ring();
@@ -264,9 +280,120 @@ void rocky(){
     
 }
 
+//function for blue planet
+void planet1() {
+    glPushMatrix();
+    glTranslatef(6,3,21 + z);
+
+    //glColor3f(1, 0.5, 0); // Red color used to draw.
+    glColor3f(0.25, 0.25, 0.25);
+    // changing in transformation matrix.
+    // rotation about X axis
+    
+    //glRotatef(yRotated,0.0,1,0.0);
+    // rotation about Z axis
+    //glRotatef(zRotated,0.0,0.0,1.0);
+    glRotatef(yRotated, 0, 1, 0);
+    glScalef(1,1,1); // scaling transfomation
+    // NOTE: built-in (glut library) function , draw you a sphere.
+    glutSolidSphere(2,20,19);
+    
+    
+    
+    glPopMatrix();
+    
+}
+
+void planet2() {
+    glPushMatrix();
+    glTranslatef(-3,3,28 + z);
+
+    //glColor3f(1, 0.5, 0); // Red color used to draw.
+    glColor3f(1, 0, 1);
+    // changing in transformation matrix.
+    // rotation about X axis
+    
+    //glRotatef(yRotated,0.0,1,0.0);
+    // rotation about Z axis
+    //glRotatef(zRotated,0.0,0.0,1.0);
+    glRotatef(yRotated, 0, 1, 0);
+    glScalef(1,1,1); // scaling transfomation
+    // NOTE: built-in (glut library) function , draw you a sphere.
+    glutSolidSphere(2,20,19);
+    glPopMatrix();
+    
+}
+void endsun() {
+    glPushMatrix();
+    glTranslatef(0,3,48 + z);
+
+    //glColor3f(1, 0.5, 0); // Red color used to draw.
+    glColor3f(1, 0.5, 0);
+    // changing in transformation matrix.
+    // rotation about X axis
+    
+    //glRotatef(yRotated,0.0,1,0.0);
+    // rotation about Z axis
+    //glRotatef(zRotated,0.0,0.0,1.0);
+    glRotatef(yRotated, 0, 1, 0);
+    glScalef(1,1,1); // scaling transfomation
+    // NOTE: built-in (glut library) function , draw you a sphere.
+    glutSolidSphere(8,20,19);
+    glPopMatrix();
+    
+}
+//roof of house function
+void Base(){
+    glPushMatrix();
+    glBegin (GL_QUADS) ;
+    //FRONT
+    glColor3f(1.0,0.0,0.0);
+    glVertex3f(-1.0+step,2.0+step2,1.0+step3);
+    glVertex3f(-1.5+step,1.0+step2,1.0+step3);
+    glVertex3f(1.5+step,1.0+step2,1.0+step3);
+    glVertex3f(1.0+step,2.0+step2,1.0+step3);
+
+    //BACK
+    glColor3f(0.0,1.0,0.0);
+    glVertex3f(1.0+step,2.0+step2,-1.0+step3);
+    glVertex3f(1.5+step,1.0+step2,-1.0+step3);
+    glVertex3f(-1.5+step,1.0+step2,-1.0+step3);
+    glVertex3f(-1.0+step,2.0+step2,-1.0+step3);
+    //RIGHT
+    glColor3f(0.0,0.0,1.0);
+    glVertex3f(1.0+step,2.0+step2,1.0+step3);
+    glVertex3f(1.5+step,1.0+step2,1.0+step3);
+    glVertex3f(1.5+step,1.0+step2,-1.0+step3);
+    glVertex3f(1.0+step,2.0+step2,-1.0+step3);
+    //LEFT
+    glColor3f(0.0,0.0,1.0);
+    glVertex3f(-1.0+step,2.0+step2,-1.0+step3);
+    glVertex3f(-1.5+step,1.0+step2,-1.0+step3);
+    glVertex3f(-1.5+step,1.0+step2,1.0+step3);
+    glVertex3f(-1.0+step,2.0+step2,1.0+step3);
+    //TOP
+    glColor3f(0.0,1.0,1.0);
+    /*glVertex3f(-1.0,2.0,-1.0);
+    glVertex3f(-1.5,2.0,1.0);
+    glVertex3f(1.5,2.0,1.0);
+    glVertex3f(1.0,2.0,-1.0);*/
+    glVertex3f (-1.0+step,2.0+step2,-1.0+step3);
+    glVertex3f(-1.0+step,2.0+step2,1.0+step3);
+    glVertex3f(1.0+step,2.0+step2,1.0+step3);
+    glVertex3f(1.0+step,2.0+step2,-1.0+step3);
+
+    glEnd();
+
+    glPopMatrix();
+    glTranslatef(0, 3, -0.5);
 
 
 
+}
+
+
+
+//display function to call all functions needed to be displayed
 void display (void)
 {
 
@@ -285,7 +412,11 @@ void display (void)
     glTranslatef(0 , 0  , 0);
 
     rocky();
-
+     
+    planet1();
+    planet2();
+    endsun();
+    
     moon2();
     //sun();
     
@@ -297,10 +428,13 @@ void display (void)
     sun();
     
     //cuboid10();
-    glTranslatef(4, 0, 10+z);
-    glRotatef(xRotated, 1, 0, 0);
+    glTranslatef(4, -2, -6+z);
+    glRotatef(70, 1, 0, 0);
+    glRotatef(yRotated, 0, 1, 0);
+    
     //
     cube();
+    Base();
     
    
     
@@ -357,19 +491,10 @@ const GLfloat high_shininess[] = { 100.0f };
 }
 
 
-//----------------------------------  TIme  ------------------------------------
 
 
-void timer(int)
-{
-    glutPostRedisplay();
-    glutTimerFunc(1000/30,timer,0);
-    x = 0;
-    
-    
 
 
-}
 //---------------------------------- Keyboard inputs ---------------------------
 
 void processNormalKeys(unsigned char key, int x, int y) {
@@ -412,7 +537,7 @@ int main (int argc, char **argv)
     glutSpecialFunc(processSpecialKeys);
     glutDisplayFunc (display);
     glutReshapeFunc (reshapeFunc);
-    glutTimerFunc(1000, timer, 0);
+    
 
     glutIdleFunc    (idleFunc);
 
